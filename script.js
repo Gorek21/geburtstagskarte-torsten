@@ -15,6 +15,10 @@ const introPhoto = document.querySelector("#introPhoto");
 const minZoom = 13;
 const maxZoom = 35;
 
+const freeMaxZoom = 80;
+
+let constraintsEnabled = true;
+
 let scale = minZoom;
 let offsetX = 0;
 let offsetY = 0;
@@ -22,16 +26,34 @@ let offsetY = 0;
 let startX = 0;
 let startY = 0;
 let startScale = minZoom;
-let startOffsetX = 0;
-let startOffsetY = 0;
 let startDistance = 0;
 let pinchOriginX = 0;
 let pinchOriginY = 0;
 let isDragging = false;
-let fullView = false;
 
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
+}
+
+function getFitZoom() {
+  if (!photoStage || !introPhoto) return 1;
+
+  const stageWidth = photoStage.clientWidth;
+  const stageHeight = photoStage.clientHeight;
+  const imageWidth = introPhoto.offsetWidth;
+  const imageHeight = introPhoto.offsetHeight;
+
+  if (!stageWidth || !stageHeight || !imageWidth || !imageHeight) return 1;
+
+  return Math.min(stageWidth / imageWidth, stageHeight / imageHeight);
+}
+
+function getCurrentMinZoom() {
+  return constraintsEnabled ? minZoom : getFitZoom();
+}
+
+function getCurrentMaxZoom() {
+  return constraintsEnabled ? maxZoom : freeMaxZoom;
 }
 
 function getDistance(touchA, touchB) {
@@ -48,6 +70,10 @@ function getMidpoint(touchA, touchB) {
 }
 
 function getStageCenter() {
+  if (!photoStage) {
+    return { x: 0, y: 0 };
+  }
+
   const rect = photoStage.getBoundingClientRect();
 
   return {
@@ -56,22 +82,48 @@ function getStageCenter() {
   };
 }
 
-function clampOffsets() {
-  if (!photoStage || !introPhoto) return;
+function getImageBounds() {
+  if (!photoStage || !introPhoto) {
+    return {
+      maxX: 0,
+      maxY: 0
+    };
+  }
 
   const stageWidth = photoStage.clientWidth;
   const stageHeight = photoStage.clientHeight;
+
   const imageWidth = introPhoto.offsetWidth * scale;
   const imageHeight = introPhoto.offsetHeight * scale;
 
   const maxX = Math.max(0, (imageWidth - stageWidth) / 2);
   const maxY = Math.max(0, (imageHeight - stageHeight) / 2);
 
+  return {
+    maxX,
+    maxY
+  };
+}
+
+function clampOffsets() {
+  if (!photoStage || !introPhoto) return;
+
+  const { maxX, maxY } = getImageBounds();
+
   offsetX = clamp(offsetX, -maxX, maxX);
   offsetY = clamp(offsetY, -maxY, maxY);
+
+  if (maxX === 0) {
+    offsetX = 0;
+  }
+
+  if (maxY === 0) {
+    offsetY = 0;
+  }
 }
 
 function renderPhoto() {
+  scale = clamp(scale, getCurrentMinZoom(), getCurrentMaxZoom());
   clampOffsets();
 
   if (introPhoto) {
@@ -79,30 +131,33 @@ function renderPhoto() {
   }
 
   if (photoStage) {
-    photoStage.classList.toggle("is-zoomed", scale > minZoom + 0.01);
+    photoStage.classList.toggle("is-zoomed", scale > getCurrentMinZoom() + 0.01);
+    photoStage.classList.toggle("free-mode", !constraintsEnabled);
   }
 }
 
-function setFullView(enabled) {
-  fullView = enabled;
+function setConstraints(enabled) {
+  constraintsEnabled = enabled;
 
-  if (fullView) {
-    scale = 1;
-    offsetX = 0;
-    offsetY = 0;
-    photoStage?.classList.add("show-full");
-
-    if (fullViewButton) {
-      fullViewButton.innerHTML = "Zurück zum<br>Suchbild";
-    }
-  } else {
+  if (constraintsEnabled) {
     scale = minZoom;
     offsetX = 0;
     offsetY = 0;
+
     photoStage?.classList.remove("show-full");
 
     if (fullViewButton) {
       fullViewButton.innerHTML = "Ich möchte wissen,<br>was dieses Objekt ist";
+    }
+  } else {
+    scale = getFitZoom();
+    offsetX = 0;
+    offsetY = 0;
+
+    photoStage?.classList.add("show-full");
+
+    if (fullViewButton) {
+      fullViewButton.innerHTML = "Zurück zum<br>Suchbild";
     }
   }
 
@@ -110,22 +165,7 @@ function setFullView(enabled) {
 }
 
 function resetZoom() {
-  setFullView(false);
-}
-
-function leaveFullViewForManualZoom() {
-  if (!fullView) return;
-
-  fullView = false;
-  photoStage?.classList.remove("show-full");
-
-  if (fullViewButton) {
-    fullViewButton.innerHTML = "Ich möchte wissen,<br>was dieses Objekt ist";
-  }
-
-  scale = minZoom;
-  offsetX = 0;
-  offsetY = 0;
+  setConstraints(true);
 }
 
 function openCardFromPhoto() {
@@ -167,8 +207,9 @@ function closeSecret() {
 
 enterCardButton?.addEventListener("click", openCardFromPhoto);
 resetZoomButton?.addEventListener("click", resetZoom);
+
 fullViewButton?.addEventListener("click", () => {
-  setFullView(!fullView);
+  setConstraints(!constraintsEnabled);
 });
 
 revealButton?.addEventListener("click", openSecret);
@@ -191,10 +232,14 @@ photoStage?.addEventListener("wheel", (event) => {
 
   if (!photoStage) return;
 
-  leaveFullViewForManualZoom();
-
   const oldScale = scale;
-  const newScale = clamp(scale + (event.deltaY < 0 ? 0.8 : -0.8), minZoom, maxZoom);
+  const zoomStep = constraintsEnabled ? 0.8 : 1.4;
+
+  const newScale = clamp(
+    scale + (event.deltaY < 0 ? zoomStep : -zoomStep),
+    getCurrentMinZoom(),
+    getCurrentMaxZoom()
+  );
 
   const stageCenter = getStageCenter();
 
@@ -216,15 +261,11 @@ photoStage?.addEventListener("touchstart", (event) => {
   if (event.touches.length === 2) {
     event.preventDefault();
 
-    leaveFullViewForManualZoom();
-
     const midpoint = getMidpoint(event.touches[0], event.touches[1]);
     const stageCenter = getStageCenter();
 
     startDistance = getDistance(event.touches[0], event.touches[1]);
     startScale = scale;
-    startOffsetX = offsetX;
-    startOffsetY = offsetY;
 
     const pointerX = midpoint.x - stageCenter.x;
     const pointerY = midpoint.y - stageCenter.y;
@@ -255,7 +296,11 @@ photoStage?.addEventListener("touchmove", (event) => {
     const pointerX = midpoint.x - stageCenter.x;
     const pointerY = midpoint.y - stageCenter.y;
 
-    scale = clamp(startScale * (currentDistance / startDistance), minZoom, maxZoom);
+    scale = clamp(
+      startScale * (currentDistance / startDistance),
+      getCurrentMinZoom(),
+      getCurrentMaxZoom()
+    );
 
     offsetX = pointerX - pinchOriginX * scale;
     offsetY = pointerY - pinchOriginY * scale;
