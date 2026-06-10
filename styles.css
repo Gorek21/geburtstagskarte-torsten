@@ -23,12 +23,13 @@
   box-sizing: border-box;
 }
 
-html,
-body {
+html {
   min-height: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
+  min-height: 100%;
   margin: 0;
   color: var(--ink);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -37,6 +38,10 @@ body {
     radial-gradient(circle at 80% 20%, rgba(166, 55, 43, 0.18), transparent 24rem),
     linear-gradient(135deg, var(--bg-1), var(--bg-2) 50%, var(--bg-3));
   overflow-x: hidden;
+}
+
+body.card-open {
+  overflow-y: auto;
 }
 
 .page-glow {
@@ -73,7 +78,6 @@ body {
 .birthday-card {
   position: relative;
   width: 100%;
-  height: min(78vh, 720px);
   min-height: 620px;
   transform-style: preserve-3d;
   transition: transform 1s cubic-bezier(.2,.82,.2,1);
@@ -84,17 +88,18 @@ body {
 }
 
 .face {
-  position: absolute;
-  inset: 0;
   border-radius: var(--radius);
   backface-visibility: hidden;
-  overflow: hidden;
   box-shadow:
     0 35px 100px var(--shadow),
     inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
 .face-front {
+  position: absolute;
+  inset: 0;
+  min-height: 620px;
+  overflow: hidden;
   background:
     linear-gradient(145deg, rgba(255,255,255,0.24), transparent 35%),
     radial-gradient(circle at top left, rgba(202,162,90,0.28), transparent 18rem),
@@ -124,7 +129,7 @@ body {
 .front-inner {
   position: relative;
   z-index: 1;
-  min-height: 100%;
+  min-height: 620px;
   display: grid;
   place-content: center;
   text-align: center;
@@ -182,6 +187,7 @@ body {
 
 .button {
   appearance: none;
+  -webkit-appearance: none;
   border: 0;
   cursor: pointer;
   font: inherit;
@@ -217,13 +223,15 @@ body {
 }
 
 .face-back {
+  position: relative;
+  min-height: 620px;
   transform: rotateY(180deg);
   color: #f6eee3;
   background:
     radial-gradient(circle at top right, rgba(202,162,90,0.10), transparent 18rem),
     linear-gradient(160deg, var(--dark-panel), var(--dark-panel-2));
   padding: clamp(24px, 4vw, 38px);
-  overflow: auto;
+  overflow: visible;
 }
 
 .face-back::before {
@@ -358,24 +366,58 @@ body {
   transform: translateY(0);
 }
 
-.birthday-card.is-open .reveal:nth-of-type(1) { transition-delay: 120ms; }
-.birthday-card.is-open .reveal:nth-of-type(2) { transition-delay: 220ms; }
-.birthday-card.is-open .reveal:nth-of-type(3) { transition-delay: 320ms; }
-.birthday-card.is-open .reveal:nth-of-type(4) { transition-delay: 420ms; }
-.birthday-card.is-open .reveal:nth-of-type(5) { transition-delay: 520ms; }
-.birthday-card.is-open .reveal:nth-of-type(6) { transition-delay: 620ms; }
-.birthday-card.is-open .reveal:nth-of-type(7) { transition-delay: 720ms; }
-.birthday-card.is-open .reveal:nth-of-type(8) { transition-delay: 820ms; }
-.birthday-card.is-open .reveal:nth-of-type(9) { transition-delay: 920ms; }
-
 @media (max-width: 820px) {
+  .scene {
+    display: block;
+    min-height: 100svh;
+    padding: 14px;
+  }
+
+  .card-shell {
+    width: 100%;
+    perspective: none;
+  }
+
   .birthday-card {
-    height: auto;
-    min-height: 700px;
+    min-height: auto;
+    transform: none;
+    transition: none;
+  }
+
+  .birthday-card.is-open {
+    transform: none;
   }
 
   .face {
-    position: absolute;
+    box-shadow:
+      0 22px 60px rgba(0,0,0,0.34),
+      inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+
+  .face-front {
+    position: relative;
+    min-height: calc(100svh - 28px);
+    display: block;
+  }
+
+  .front-inner {
+    min-height: calc(100svh - 28px);
+  }
+
+  .face-back {
+    display: none;
+    transform: none;
+    min-height: auto;
+    padding: 26px 18px 34px;
+    overflow: visible;
+  }
+
+  .birthday-card.is-open .face-front {
+    display: none;
+  }
+
+  .birthday-card.is-open .face-back {
+    display: block;
   }
 
   .clue-grid {
@@ -398,26 +440,56 @@ body {
 
 @media (max-width: 560px) {
   .scene {
-    padding: 16px;
+    padding: 10px;
   }
 
-  .birthday-card {
-    min-height: 760px;
+  .face-front,
+  .front-inner {
+    min-height: calc(100svh - 20px);
   }
 
   .front-inner {
     padding: 28px 20px;
   }
 
+  .face-front h1 {
+    font-size: clamp(2.3rem, 12vw, 4.2rem);
+  }
+
   .lead {
     font-size: 1rem;
   }
 
+  .front-tags {
+    gap: 8px;
+  }
+
   .front-tags span {
-    font-size: 0.88rem;
+    font-size: 0.86rem;
+    padding: 8px 10px;
   }
 
   .face-back {
-    padding: 22px 18px;
+    padding: 24px 16px 34px;
+  }
+
+  .face-back h2 {
+    font-size: clamp(2rem, 11vw, 3rem);
+  }
+
+  .mystery-intro {
+    font-size: 1rem;
+  }
+
+  .clue {
+    padding: 16px;
+  }
+
+  .clue strong {
+    font-size: 1.22rem;
+  }
+
+  .clue p {
+    font-size: 0.98rem;
   }
 }
