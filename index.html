@@ -3,198 +3,137 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Torsten 50 – Version 5</title>
-  <meta name="description" content="Eine organisierte und geheimnisvolle Geburtstagskarte für Torsten zum 50.">
+  <title>Torsten 50 Tour</title>
+  <meta name="description" content="Eine geheimnisvolle Geburtstagskarte für Torsten zum 50.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="app">
-    <section class="intro-screen" id="start" aria-labelledby="title">
-      <div class="scan-grid" aria-hidden="true"></div>
-      <div class="pulse pulse-one" aria-hidden="true"></div>
-      <div class="pulse pulse-two" aria-hidden="true"></div>
+  <main class="page-frame">
+    <section class="hero" id="start" aria-labelledby="hero-title">
+      <div class="grain" aria-hidden="true"></div>
 
-      <div class="intro-panel">
-        <div class="system-bar">
-          <span class="dot red"></span>
-          <span class="dot yellow"></span>
-          <span class="dot green"></span>
-          <span class="system-text">Geburtstagszentrale 2026</span>
-        </div>
+      <div class="orbit orbit-one" aria-hidden="true"></div>
+      <div class="orbit orbit-two" aria-hidden="true"></div>
 
-        <div class="headline-block">
-          <p class="label">Status: vorbereitet</p>
-          <h1 id="title">Hallo Torsten.</h1>
-          <p class="intro-text">
-            50 Jahre. Viel erlebt. Viel geschafft.
-            Und immer noch bereit für einen guten Ausflug mit Essen, Musik und Getränken.
+      <div class="hero-inner">
+        <p class="eyebrow">Backstage-Zugang freigegeben</p>
+
+        <div class="ticket" aria-label="Geburtstagskarte für Torsten">
+          <div class="ticket-top">
+            <span class="stamp">T-50</span>
+            <span class="serial">No. 1976-2026</span>
+          </div>
+
+          <div class="main-mark">
+            <span class="number">50</span>
+            <span class="route-line" aria-hidden="true"></span>
+          </div>
+
+          <h1 id="hero-title">Hallo Torsten.</h1>
+          <p class="lead">
+            50 Jahre. Viel erlebt.
+            Und noch lange nicht fertig.
           </p>
+
+          <div class="badge-row" aria-label="Hinweise auf die Reise">
+            <span class="badge">🥾 Wandern</span>
+            <span class="badge">🍺 Bier</span>
+            <span class="badge">🎸 Rock</span>
+            <span class="badge">🧭 Ausflug</span>
+          </div>
+
+          <button class="reveal-button" type="button" data-reveal>
+            Geheimnis öffnen
+          </button>
         </div>
 
-        <div class="main-counter" aria-label="50. Geburtstag">
-          <span class="counter-number">50</span>
-          <span class="counter-text">Jahre Erfahrung</span>
-        </div>
-
-        <div class="quick-info" aria-label="Themen">
-          <span>🥾 Wandern</span>
-          <span>🍺 Bier</span>
-          <span>🎸 Rock</span>
-          <span>🧭 Ausflug</span>
-        </div>
-
-        <button class="primary-button" type="button" data-open>
-          Plan öffnen
-        </button>
-
-        <p class="small-hint">
-          Der Plan ist nicht geheim, weil er gefährlich ist. Er ist geheim, weil es mehr Spaß macht.
+        <p class="under-note">
+          Keine Sorge. Es ist alles vorbereitet. Nur noch nicht alles verraten.
         </p>
       </div>
     </section>
 
-    <section class="dashboard" id="dashboard" hidden>
-      <div class="dashboard-inner">
-        <header class="dashboard-header">
-          <p class="label">Torsten 50</p>
-          <h2>Planübersicht</h2>
+    <section class="details" id="details" aria-labelledby="details-title" hidden>
+      <div class="details-shell">
+        <header class="details-header">
+          <p class="eyebrow">Torsten 50 Tour</p>
+          <h2 id="details-title">Der Plan ist fast entschlüsselt.</h2>
           <p>
-            Die wichtigsten Punkte sind vorbereitet.
-            Einiges ist bekannt. Einiges bleibt noch offen.
-            Alles wirkt verdächtig gut organisiert.
+            Ein Ausflug ist vorbereitet. Das Ziel steht fest.
+            Das genaue Datum bleibt noch geheim.
           </p>
         </header>
 
-        <section class="status-grid" aria-label="Statusübersicht">
-          <article class="status-card confirmed">
-            <span class="status-kicker">Ausflugsziel</span>
-            <strong>bekannt</strong>
-            <p>Das Ziel steht fest. Es wird nur noch nicht komplett verraten.</p>
-          </article>
-
-          <article class="status-card unknown">
-            <span class="status-kicker">Datum</span>
-            <strong>unbekannt</strong>
-            <p>Der Zeitpunkt bleibt noch offen. Das hält den Kalender wach.</p>
-          </article>
-
-          <article class="status-card partial">
-            <span class="status-kicker">Teilnehmer</span>
-            <strong>zum Teil bekannt</strong>
-            <p>Ein Teil der Runde steht fest. Der Rest erscheint später im Bild.</p>
-          </article>
-
-          <article class="status-card confirmed">
-            <span class="status-kicker">Hotel</span>
-            <strong>bekannt</strong>
-            <p>Die Übernachtung ist geregelt. Improvisieren kann man mit 50 anderen überlassen.</p>
-          </article>
-
-          <article class="status-card confirmed">
-            <span class="status-kicker">Restaurant</span>
-            <strong>bekannt</strong>
-            <p>Das Abendessen ist gesichert. Der Tag endet also nicht mit trockenen Brötchen.</p>
-          </article>
-        </section>
-
-        <section class="timeline" aria-label="Ablauf">
-          <div class="timeline-header">
-            <h2>Ablauf, grob entschlüsselt</h2>
-            <p>Keine Uhrzeiten. Keine Panik. Nur die Richtung.</p>
+        <section class="pass" aria-label="Tourpass mit Hinweisen">
+          <div class="pass-title">
+            <span>Backstage-Pass</span>
+            <strong>gültig für einen sehr guten Tag</strong>
           </div>
 
-          <div class="timeline-list">
-            <article class="timeline-item">
-              <span class="time-code">01</span>
+          <div class="perforation" aria-hidden="true"></div>
+
+          <div class="clue-grid">
+            <article class="clue">
+              <span class="clue-icon">🧭</span>
               <div>
-                <h3>Start</h3>
-                <p>Wanderschuhe bereithalten. Der Tag beginnt nicht auf dem Sofa.</p>
+                <h3>Ausflugsziel</h3>
+                <p>Bekannt. Aber noch nicht für alle. Ein bisschen Spannung muss bleiben.</p>
               </div>
             </article>
 
-            <article class="timeline-item">
-              <span class="time-code">02</span>
+            <article class="clue">
+              <span class="clue-icon">🌒</span>
               <div>
-                <h3>Ausflug</h3>
-                <p>Ein Ziel ist geplant. Aussicht und Bewegung sind sehr wahrscheinlich.</p>
+                <h3>Datum</h3>
+                <p>Noch unbekannt. Die Wanderschuhe sollten trotzdem bereitstehen.</p>
               </div>
             </article>
 
-            <article class="timeline-item">
-              <span class="time-code">03</span>
+            <article class="clue">
+              <span class="clue-icon">👥</span>
               <div>
-                <h3>Pause</h3>
-                <p>Durst nicht übertreiben. Aber auch nicht komplett ignorieren.</p>
+                <h3>Teilnehmer</h3>
+                <p>Zum Teil bekannt. Der Rest wird später aufgedeckt.</p>
               </div>
             </article>
 
-            <article class="timeline-item">
-              <span class="time-code">04</span>
+            <article class="clue">
+              <span class="clue-icon">🏨</span>
               <div>
-                <h3>Abend</h3>
-                <p>Gutes Essen, gute Runde, kein Pflichtprogramm.</p>
+                <h3>Übernachtung</h3>
+                <p>Hotel bekannt. Ein Schlafplatz ist also gesichert.</p>
+              </div>
+            </article>
+
+            <article class="clue">
+              <span class="clue-icon">🍽️</span>
+              <div>
+                <h3>Abendessen</h3>
+                <p>Restaurant bekannt. Der Abend endet nicht mit einem Zufallsplan.</p>
               </div>
             </article>
           </div>
         </section>
 
-        <section class="control-panel" aria-label="Checkliste">
-          <div class="control-text">
-            <p class="label">Vorbereitungsstand</p>
-            <h2>Was Torsten wissen muss</h2>
+        <section class="message-panel" aria-label="Geburtstagsbotschaft">
+          <div class="vinyl" aria-hidden="true"></div>
+          <div>
+            <h2>50 Jahre. Kein leiser Meilenstein.</h2>
             <p>
-              Nicht alles. Nur genug, um vorbereitet zu sein.
-              Der Rest wird rechtzeitig enthüllt.
+              Rock, Aussicht, gutes Essen und ein Abend, der nicht nach Pflichtprogramm klingt.
+            </p>
+            <p>
+              Durst nicht übertreiben. Aber auch nicht komplett ignorieren.
             </p>
           </div>
-
-          <div class="checklist">
-            <label>
-              <input type="checkbox" checked>
-              <span>Gute Laune einplanen</span>
-            </label>
-
-            <label>
-              <input type="checkbox" checked>
-              <span>Schuhe nicht im Keller vergessen</span>
-            </label>
-
-            <label>
-              <input type="checkbox" checked>
-              <span>Rock-Modus aktivieren</span>
-            </label>
-
-            <label>
-              <input type="checkbox" checked>
-              <span>Glas sicher bedienen</span>
-            </label>
-
-            <label>
-              <input type="checkbox">
-              <span>Zu viele Fragen stellen</span>
-            </label>
-          </div>
         </section>
 
-        <section class="birthday-message" aria-label="Geburtstagsbotschaft">
-          <p class="message-big">
-            50 ist kein Neustart. 50 ist die Version mit besseren Einstellungen.
-          </p>
-          <p>
-            Mehr Erfahrung. Weniger Geduld für schlechte Pläne.
-            Genau deshalb wurde dieser Ausflug ordentlich vorbereitet.
-          </p>
+        <section class="final-note" aria-label="Abschluss">
+          <p class="large">Alles Weitere wird rechtzeitig enthüllt.</p>
+          <p>Bis dahin gilt: Schuhe bereitstellen. Glas nicht verlieren. Haltung bewahren.</p>
         </section>
 
-        <section class="final-card" aria-label="Abschluss">
-          <h2>Weitere Informationen folgen.</h2>
-          <p>
-            Bis dahin gilt: Haltung bewahren, Schuhe bereithalten,
-            Durst kontrollieren und den Plan nicht zerreden.
-          </p>
-        </section>
-
-        <button class="secondary-button" type="button" data-back>
+        <button class="back-button" type="button" data-back>
           Zurück zur Begrüßung
         </button>
       </div>

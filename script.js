@@ -1,49 +1,32 @@
-const openButton = document.querySelector("[data-open]");
+const revealButton = document.querySelector("[data-reveal]");
 const backButton = document.querySelector("[data-back]");
-const dashboard = document.querySelector("#dashboard");
+const details = document.querySelector("#details");
 const start = document.querySelector("#start");
-const animatedItems = document.querySelectorAll(".status-card, .timeline-item");
 
-function openDashboard() {
-  dashboard.hidden = false;
-  document.body.classList.add("is-open");
+function openSecret() {
+  details.hidden = false;
+  document.body.classList.add("is-revealed");
 
   requestAnimationFrame(() => {
-    dashboard.scrollIntoView({ behavior: "smooth", block: "start" });
+    details.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 }
 
-function closeDashboard() {
-  document.body.classList.remove("is-open");
+function closeSecret() {
+  document.body.classList.remove("is-revealed");
 
   start.scrollIntoView({ behavior: "smooth", block: "start" });
 
   window.setTimeout(() => {
-    dashboard.hidden = true;
+    details.hidden = true;
   }, 360);
 }
 
-openButton?.addEventListener("click", openDashboard);
-backButton?.addEventListener("click", closeDashboard);
+revealButton?.addEventListener("click", openSecret);
+backButton?.addEventListener("click", closeSecret);
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !dashboard.hidden) {
-    closeDashboard();
+  if (event.key === "Escape" && !details.hidden) {
+    closeSecret();
   }
 });
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, index) => {
-    if (entry.isIntersecting) {
-      window.setTimeout(() => {
-        entry.target.classList.add("visible");
-      }, index * 80);
-
-      observer.unobserve(entry.target);
-    }
-  });
-}, {
-  threshold: 0.18
-});
-
-animatedItems.forEach((item) => observer.observe(item));
