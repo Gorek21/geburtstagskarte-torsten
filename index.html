@@ -7,70 +7,119 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="noise"></div>
+  <div class="page-glow"></div>
+  <div class="grain"></div>
 
-  <main class="stage">
-    <section class="card" id="card">
-      <div class="card-front">
-        <p class="eyebrow">Zum 55. Geburtstag</p>
+  <main class="scene">
+    <section class="card-shell">
+      <div class="birthday-card" id="birthdayCard">
 
-        <h1>
-          Torsten,<br>
-          aufdrehen.
-        </h1>
+        <section class="face face-front">
+          <div class="front-inner">
+            <p class="kicker">Zum 50. Geburtstag</p>
 
-        <p class="subtitle">
-          Eine Karte für Rock, Gipfel und gute Tage.
-        </p>
+            <h1>
+              Torsten,<br>
+              bitte kurz<br>
+              nicht unauffällig sein.
+            </h1>
 
-        <button class="open-button" id="openCard">
-          Karte öffnen
-        </button>
+            <p class="lead">
+              50 Jahre. Rock im Ohr, Wanderlust im System und
+              mit hoher Wahrscheinlichkeit ein gutes Getränk in Reichweite.
+            </p>
 
-        <div class="icons" aria-hidden="true">
-          <span>⚡</span>
-          <span>⛰</span>
-          <span>♬</span>
-        </div>
-      </div>
+            <div class="front-tags" aria-hidden="true">
+              <span>Rock</span>
+              <span>Wandern</span>
+              <span>Ausflüge</span>
+              <span>solide Trinkkultur</span>
+            </div>
 
-      <div class="card-inside">
-        <p class="small">Alles Gute zum Geburtstag</p>
+            <button class="button primary" id="openCard">
+              Karte öffnen
+            </button>
 
-        <h2>55 Jahre. Kein leiser Jahrgang.</h2>
+            <p class="small-note">
+              Freundlicher Hinweis: Der Inhalt könnte Spuren von Überraschung enthalten.
+            </p>
+          </div>
+        </section>
 
-        <p>
-          Du bekommst keine Standardkarte und keinen Kram, der im Regal verstaubt.
-          Du bekommst eine kleine Auszeit.
-        </p>
+        <section class="face face-back">
+          <div class="back-top">
+            <div>
+              <p class="file-label">GEHEIMAKTE T-50</p>
+              <h2>Ermittlungsstand zur Geburtstagslage</h2>
+            </div>
 
-        <div class="gift-box">
-          <span class="gift-label">Dein Geschenk</span>
-          <strong>Eine Reise steht an.</strong>
-          <p>
-            Details folgen hier. Erstmal zählt nur:
-            Wanderschuhe bereithalten, Musik nicht vergessen.
+            <button class="button secondary" id="closeCard">
+              zurück
+            </button>
+          </div>
+
+          <p class="mystery-intro reveal">
+            Die Lage ist eindeutig: Es wird nicht einfach nur Geburtstag gefeiert.
+            Es verdichten sich Hinweise auf einen Ausflug mit Substanz, Aussicht
+            und kontrolliertem Kontrollverlust.
           </p>
-        </div>
 
-        <div class="details">
-          <div>
-            <span>Modus</span>
-            <strong>Rauskommen</strong>
-          </div>
-          <div>
-            <span>Soundtrack</span>
-            <strong>Rock</strong>
-          </div>
-          <div>
-            <span>Programm</span>
-            <strong>Natur, Aussicht, gutes Essen</strong>
-          </div>
-        </div>
+          <div class="clue-grid">
+            <article class="clue reveal">
+              <span class="clue-label">Ausflugsziel</span>
+              <strong>bekannt</strong>
+              <p>Der Zielort ist bereits identifiziert. Die Information wird noch zurückgehalten.</p>
+            </article>
 
-        <p class="closing">
-          Bleib laut, klar und unterwegs.
-        </p>
+            <article class="clue reveal">
+              <span class="clue-label">Datum</span>
+              <strong>unbekannt</strong>
+              <p>Die Zeitachse bleibt bewusst vage. Verdächtig, aber stilvoll.</p>
+            </article>
+
+            <article class="clue reveal">
+              <span class="clue-label">Teilnehmer</span>
+              <strong>zum Teil bekannt</strong>
+              <p>Einige Namen sind im Umlauf. Vollständige Transparenz wäre derzeit unprofessionell.</p>
+            </article>
+
+            <article class="clue reveal">
+              <span class="clue-label">Übernachtung / Hotel</span>
+              <strong>bekannt</strong>
+              <p>Ein Ort zum Landen ist gesichert. Sauberes Bett, gute Basis, keine weitere Aussage.</p>
+            </article>
+
+            <article class="clue reveal">
+              <span class="clue-label">Abendessen / Restaurant</span>
+              <strong>bekannt</strong>
+              <p>Die Abendverpflegung ist vorgesehen. Hunger ist kein Teil des Konzepts.</p>
+            </article>
+
+            <article class="clue reveal special">
+              <span class="clue-label">Persönlichkeitsprofil</span>
+              <strong>stabil</strong>
+              <p>
+                Mag Rock. Mag Wandern. Mag Ausflüge. Mag gute Abende.
+                Es besteht also akute Reiseeignung.
+              </p>
+            </article>
+          </div>
+
+          <div class="stamp-wrap reveal">
+            <div class="stamp">TOP SECRET</div>
+          </div>
+
+          <div class="back-footer reveal">
+            <p>
+              Weitere Details werden zu gegebener Zeit offengelegt.
+              Vermutlich nicht nüchtern. Aber seriös genug.
+            </p>
+            <p class="signature">
+              Aktennotiz: Wanderschuhe bereithalten. Kehle ebenfalls.
+            </p>
+          </div>
+        </section>
+
       </div>
     </section>
   </main>

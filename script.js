@@ -1,6 +1,11 @@
-const card = document.querySelector("#card");
-const button = document.querySelector("#openCard");
+const card = document.querySelector("#birthdayCard");
+const openButton = document.querySelector("#openCard");
+const closeButton = document.querySelector("#closeCard");
 
-button.addEventListener("click", () => {
+openButton.addEventListener("click", () => {
   card.classList.add("is-open");
+});
+
+closeButton.addEventListener("click", () => {
+  card.classList.remove("is-open");
 });
