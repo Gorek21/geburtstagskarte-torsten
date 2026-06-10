@@ -126,17 +126,17 @@ button {
 
 /* Foto-Intro */
 
-.photo-intro {
-  position: relative;
-  min-height: 100svh;
-  display: grid;
-  place-items: center;
-  padding: 24px 14px;
-  isolation: isolate;
-  transition:
-    opacity 520ms ease,
-    transform 520ms ease,
-    filter 520ms ease;
+.intro-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center center;
+  will-change: transform;
+  transition: transform 80ms linear;
+  -webkit-user-drag: none;
+  user-select: none;
+  touch-action: none;
 }
 
 .photo-intro.is-leaving {

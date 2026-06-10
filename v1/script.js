@@ -11,14 +11,21 @@ const start = document.querySelector("#start");
 const photoStage = document.querySelector("#photoStage");
 const introPhoto = document.querySelector("#introPhoto");
 
-let scale = 1;
+const minZoom = 8;
+const maxZoom = 20;
+
+let scale = minZoom;
 let offsetX = 0;
 let offsetY = 0;
+
 let startX = 0;
 let startY = 0;
-let startScale = 1;
+let startScale = minZoom;
+let startOffsetX = 0;
+let startOffsetY = 0;
 let startDistance = 0;
-let lastMidpoint = null;
+let pinchOriginX = 0;
+let pinchOriginY = 0;
 let isDragging = false;
 
 function clamp(value, min, max) {
@@ -38,6 +45,15 @@ function getMidpoint(touchA, touchB) {
   };
 }
 
+function getStageCenter() {
+  const rect = photoStage.getBoundingClientRect();
+
+  return {
+    x: rect.left + rect.width / 2,
+    y: rect.top + rect.height / 2
+  };
+}
+
 function clampOffsets() {
   if (!photoStage || !introPhoto) return;
 
@@ -51,11 +67,6 @@ function clampOffsets() {
 
   offsetX = clamp(offsetX, -maxX, maxX);
   offsetY = clamp(offsetY, -maxY, maxY);
-
-  if (scale <= 1) {
-    offsetX = 0;
-    offsetY = 0;
-  }
 }
 
 function renderPhoto() {
@@ -66,12 +77,12 @@ function renderPhoto() {
   }
 
   if (photoStage) {
-    photoStage.classList.toggle("is-zoomed", scale > 1.01);
+    photoStage.classList.toggle("is-zoomed", scale > minZoom + 0.01);
   }
 }
 
 function resetZoom() {
-  scale = 1;
+  scale = minZoom;
   offsetX = 0;
   offsetY = 0;
   renderPhoto();
@@ -135,68 +146,99 @@ photoStage?.addEventListener("dblclick", resetZoom);
 photoStage?.addEventListener("wheel", (event) => {
   event.preventDefault();
 
-  const delta = event.deltaY < 0 ? 0.18 : -0.18;
-  scale = clamp(scale + delta, 1, 4);
+  if (!photoStage) return;
+
+  const oldScale = scale;
+  const newScale = clamp(scale + (event.deltaY < 0 ? 0.8 : -0.8), minZoom, maxZoom);
+
+  const stageCenter = getStageCenter();
+
+  const pointerX = event.clientX - stageCenter.x;
+  const pointerY = event.clientY - stageCenter.y;
+
+  const imagePointX = (pointerX - offsetX) / oldScale;
+  const imagePointY = (pointerY - offsetY) / oldScale;
+
+  scale = newScale;
+
+  offsetX = pointerX - imagePointX * scale;
+  offsetY = pointerY - imagePointY * scale;
+
   renderPhoto();
 }, { passive: false });
 
 photoStage?.addEventListener("touchstart", (event) => {
   if (event.touches.length === 2) {
+    event.preventDefault();
+
+    const midpoint = getMidpoint(event.touches[0], event.touches[1]);
+    const stageCenter = getStageCenter();
+
     startDistance = getDistance(event.touches[0], event.touches[1]);
     startScale = scale;
-    lastMidpoint = getMidpoint(event.touches[0], event.touches[1]);
+    startOffsetX = offsetX;
+    startOffsetY = offsetY;
+
+    const pointerX = midpoint.x - stageCenter.x;
+    const pointerY = midpoint.y - stageCenter.y;
+
+    pinchOriginX = (pointerX - offsetX) / scale;
+    pinchOriginY = (pointerY - offsetY) / scale;
+
     isDragging = false;
-  } else if (event.touches.length === 1 && scale > 1) {
+  } else if (event.touches.length === 1) {
+    event.preventDefault();
+
     const touch = event.touches[0];
+
     startX = touch.clientX - offsetX;
     startY = touch.clientY - offsetY;
     isDragging = true;
   }
-}, { passive: true });
+}, { passive: false });
 
 photoStage?.addEventListener("touchmove", (event) => {
   if (event.touches.length === 2) {
     event.preventDefault();
 
+    const midpoint = getMidpoint(event.touches[0], event.touches[1]);
     const currentDistance = getDistance(event.touches[0], event.touches[1]);
-    const currentMidpoint = getMidpoint(event.touches[0], event.touches[1]);
+    const stageCenter = getStageCenter();
 
-    scale = clamp(startScale * (currentDistance / startDistance), 1, 4);
+    const pointerX = midpoint.x - stageCenter.x;
+    const pointerY = midpoint.y - stageCenter.y;
 
-    if (lastMidpoint) {
-      offsetX += currentMidpoint.x - lastMidpoint.x;
-      offsetY += currentMidpoint.y - lastMidpoint.y;
-    }
+    scale = clamp(startScale * (currentDistance / startDistance), minZoom, maxZoom);
 
-    lastMidpoint = currentMidpoint;
+    offsetX = pointerX - pinchOriginX * scale;
+    offsetY = pointerY - pinchOriginY * scale;
+
     renderPhoto();
-  } else if (event.touches.length === 1 && isDragging && scale > 1) {
+  } else if (event.touches.length === 1 && isDragging) {
     event.preventDefault();
 
     const touch = event.touches[0];
+
     offsetX = touch.clientX - startX;
     offsetY = touch.clientY - startY;
+
     renderPhoto();
   }
 }, { passive: false });
 
 photoStage?.addEventListener("touchend", (event) => {
-  if (event.touches.length === 1 && scale > 1) {
+  if (event.touches.length === 1) {
     const touch = event.touches[0];
+
     startX = touch.clientX - offsetX;
     startY = touch.clientY - offsetY;
     isDragging = true;
   } else if (event.touches.length === 0) {
     isDragging = false;
-    lastMidpoint = null;
-
-    if (scale < 1.02) {
-      resetZoom();
-    } else {
-      renderPhoto();
-    }
+    renderPhoto();
   }
 });
 
 window.addEventListener("resize", renderPhoto);
+
 renderPhoto();

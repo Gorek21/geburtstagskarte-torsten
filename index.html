@@ -9,135 +9,188 @@
 </head>
 <body>
   <main class="page-frame">
-    <section class="hero" id="start" aria-labelledby="hero-title">
+    <section class="photo-intro" id="photoIntro" aria-labelledby="photo-title">
       <div class="grain" aria-hidden="true"></div>
-
       <div class="orbit orbit-one" aria-hidden="true"></div>
       <div class="orbit orbit-two" aria-hidden="true"></div>
 
-      <div class="hero-inner">
-        <p class="eyebrow">Backstage-Zugang freigegeben</p>
+      <div class="photo-intro-inner">
+        <p class="eyebrow">Ein kurzer Blick vorab</p>
 
-        <div class="ticket" aria-label="Geburtstagskarte für Torsten">
-          <div class="ticket-top">
-            <span class="stamp">T-50</span>
-            <span class="serial">No. 1976-2026</span>
+        <div class="photo-card">
+          <div class="photo-card-top">
+            <span class="photo-stamp">Preview</span>
+            <span class="photo-serial">Torsten / 50 / 2026</span>
           </div>
 
-          <div class="main-mark">
-            <span class="number">50</span>
-            <span class="route-line" aria-hidden="true"></span>
-          </div>
-
-          <h1 id="hero-title">Hallo Torsten.</h1>
-          <p class="lead">
-            50 Jahre. Viel erlebt.
-            Und noch lange nicht fertig.
+          <h1 id="photo-title" class="photo-title">Bevor es losgeht.</h1>
+          <p class="photo-copy">
+            Erst ein Moment. Dann der Rest.
           </p>
 
-          <div class="badge-row" aria-label="Hinweise auf die Reise">
-            <span class="badge">🥾 Wandern</span>
-            <span class="badge">🍺 Bier</span>
-            <span class="badge">🎸 Rock</span>
-            <span class="badge">🧭 Ausflug</span>
+          <div class="photo-stage-wrap">
+            <div class="photo-stage" id="photoStage" aria-label="Foto-Vorschau. Mit zwei Fingern zoomen.">
+              <img
+                src="Bild.jpg"
+                alt="Foto-Vorschau für Torstens Geburtstagskarte"
+                class="intro-photo"
+                id="introPhoto">
+            </div>
           </div>
 
-          <button class="reveal-button" type="button" data-reveal>
-            Geheimnis öffnen
+          <div class="photo-hint-row">
+            <p class="photo-hint">
+              Mit zwei Fingern vergrößern oder verkleinern.
+            </p>
+            <button class="reset-zoom-button" type="button" data-reset-zoom>
+              Zoom zurücksetzen
+            </button>
+          </div>
+
+          <div class="photo-action-row">
+            <button class="photo-next-button" type="button" data-enter-card>
+              Willst du mehr erfahren? <span aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <div class="seal-area">
+            <button class="reveal-seal" type="button" data-full-view>
+              Ich möchte wissen,<br>
+              was dieses Objekt ist
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="main-content" id="mainContent" hidden>
+      <section class="hero" id="start" aria-labelledby="hero-title">
+        <div class="orbit orbit-three" aria-hidden="true"></div>
+
+        <div class="hero-inner">
+          <p class="eyebrow">Backstage-Zugang freigegeben</p>
+
+          <div class="ticket" aria-label="Geburtstagskarte für Torsten">
+            <div class="ticket-top">
+              <span class="stamp">T-50</span>
+              <span class="serial">No. 1976-2026</span>
+            </div>
+
+            <div class="main-mark">
+              <span class="number">50</span>
+              <span class="route-line" aria-hidden="true"></span>
+            </div>
+
+            <h1 id="hero-title">Hallo Torsten.</h1>
+            <p class="lead">
+              50 Jahre. Viel erlebt.
+              Und noch lange nicht fertig.
+            </p>
+
+            <div class="badge-row" aria-label="Hinweise auf die Reise">
+              <span class="badge">🥾 Wandern</span>
+              <span class="badge">🍺 Bier</span>
+              <span class="badge">🍖 Essen</span>
+              <span class="badge">🧭 Ausflug</span>
+            </div>
+
+            <button class="reveal-button" type="button" data-reveal>
+              Geheimnis öffnen
+            </button>
+          </div>
+
+          <p class="under-note">
+            Keine Sorge. Es ist alles vorbereitet. Nur noch nicht alles verraten.
+          </p>
+        </div>
+      </section>
+
+      <section class="details" id="details" aria-labelledby="details-title" hidden>
+        <div class="details-shell">
+          <header class="details-header">
+            <p class="eyebrow">Torsten 50 Tour</p>
+            <h2 id="details-title">Der Plan ist fast entschlüsselt.</h2>
+            <p>
+              Ein Ausflug ist vorbereitet. Das Ziel steht fest.
+              Das genaue Datum bleibt noch geheim.
+            </p>
+          </header>
+
+          <section class="pass" aria-label="Tourpass mit Hinweisen">
+            <div class="pass-title">
+              <span>Backstage-Pass</span>
+              <strong>gültig für einen sehr guten Tag</strong>
+            </div>
+
+            <div class="perforation" aria-hidden="true"></div>
+
+            <div class="clue-grid">
+              <article class="clue">
+                <span class="clue-icon">🧭</span>
+                <div>
+                  <h3>Ausflugsziel</h3>
+                  <p>Bekannt. Aber noch nicht für alle. Ein bisschen Spannung muss bleiben.</p>
+                </div>
+              </article>
+
+              <article class="clue">
+                <span class="clue-icon">🌒</span>
+                <div>
+                  <h3>Datum</h3>
+                  <p>Noch unbekannt. Die Wanderschuhe sollten trotzdem bereitstehen.</p>
+                </div>
+              </article>
+
+              <article class="clue">
+                <span class="clue-icon">👥</span>
+                <div>
+                  <h3>Teilnehmer</h3>
+                  <p>Zum Teil bekannt. Der Rest wird später aufgedeckt.</p>
+                </div>
+              </article>
+
+              <article class="clue">
+                <span class="clue-icon">🏨</span>
+                <div>
+                  <h3>Übernachtung</h3>
+                  <p>Hotel bekannt. Ein Schlafplatz ist also gesichert.</p>
+                </div>
+              </article>
+
+              <article class="clue">
+                <span class="clue-icon">🍽️</span>
+                <div>
+                  <h3>Abendessen</h3>
+                  <p>Restaurant bekannt. Der Abend endet nicht mit einem Zufallsplan.</p>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="message-panel" aria-label="Geburtstagsbotschaft">
+            <div class="vinyl" aria-hidden="true"></div>
+            <div>
+              <h2>50 Jahre. Kein leiser Meilenstein.</h2>
+              <p>
+                Bier, Essen, atemberaubende Aussichten und ein Abend, für die Geschichtsbücher.
+              </p>
+              <p>
+                Durst nicht übertreiben. Aber auch nicht komplett ignorieren.
+              </p>
+            </div>
+          </section>
+
+          <section class="final-note" aria-label="Abschluss">
+            <p class="large">Alles Weitere wird rechtzeitig enthüllt.</p>
+            <p>Bis dahin gilt: Schuhe bereitstellen. Glas nicht verlieren. Haltung bewahren.</p>
+          </section>
+
+          <button class="back-button" type="button" data-back>
+            Zurück zur Begrüßung
           </button>
         </div>
-
-        <p class="under-note">
-          Keine Sorge. Es ist alles vorbereitet. Nur noch nicht alles verraten.
-        </p>
-      </div>
-    </section>
-
-    <section class="details" id="details" aria-labelledby="details-title" hidden>
-      <div class="details-shell">
-        <header class="details-header">
-          <p class="eyebrow">Torsten 50 Tour</p>
-          <h2 id="details-title">Der Plan ist fast entschlüsselt.</h2>
-          <p>
-            Ein Ausflug ist vorbereitet. Das Ziel steht fest.
-            Das genaue Datum bleibt noch geheim.
-          </p>
-        </header>
-
-        <section class="pass" aria-label="Tourpass mit Hinweisen">
-          <div class="pass-title">
-            <span>Backstage-Pass</span>
-            <strong>gültig für einen sehr guten Tag</strong>
-          </div>
-
-          <div class="perforation" aria-hidden="true"></div>
-
-          <div class="clue-grid">
-            <article class="clue">
-              <span class="clue-icon">🧭</span>
-              <div>
-                <h3>Ausflugsziel</h3>
-                <p>Bekannt. Aber noch nicht für alle. Ein bisschen Spannung muss bleiben.</p>
-              </div>
-            </article>
-
-            <article class="clue">
-              <span class="clue-icon">🌒</span>
-              <div>
-                <h3>Datum</h3>
-                <p>Noch unbekannt. Die Wanderschuhe sollten trotzdem bereitstehen.</p>
-              </div>
-            </article>
-
-            <article class="clue">
-              <span class="clue-icon">👥</span>
-              <div>
-                <h3>Teilnehmer</h3>
-                <p>Zum Teil bekannt. Der Rest wird später aufgedeckt.</p>
-              </div>
-            </article>
-
-            <article class="clue">
-              <span class="clue-icon">🏨</span>
-              <div>
-                <h3>Übernachtung</h3>
-                <p>Hotel bekannt. Ein Schlafplatz ist also gesichert.</p>
-              </div>
-            </article>
-
-            <article class="clue">
-              <span class="clue-icon">🍽️</span>
-              <div>
-                <h3>Abendessen</h3>
-                <p>Restaurant bekannt. Der Abend endet nicht mit einem Zufallsplan.</p>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section class="message-panel" aria-label="Geburtstagsbotschaft">
-          <div class="vinyl" aria-hidden="true"></div>
-          <div>
-            <h2>50 Jahre. Kein leiser Meilenstein.</h2>
-            <p>
-              Rock, Aussicht, gutes Essen und ein Abend, der nicht nach Pflichtprogramm klingt.
-            </p>
-            <p>
-              Durst nicht übertreiben. Aber auch nicht komplett ignorieren.
-            </p>
-          </div>
-        </section>
-
-        <section class="final-note" aria-label="Abschluss">
-          <p class="large">Alles Weitere wird rechtzeitig enthüllt.</p>
-          <p>Bis dahin gilt: Schuhe bereitstellen. Glas nicht verlieren. Haltung bewahren.</p>
-        </section>
-
-        <button class="back-button" type="button" data-back>
-          Zurück zur Begrüßung
-        </button>
-      </div>
-    </section>
+      </section>
+    </div>
   </main>
 
   <script src="script.js"></script>
