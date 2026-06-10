@@ -3,123 +3,200 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Für Torsten</title>
+  <title>Torsten 50 – Version 5</title>
+  <meta name="description" content="Eine organisierte und geheimnisvolle Geburtstagskarte für Torsten zum 50.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="page-glow"></div>
-  <div class="grain"></div>
+  <main class="app">
+    <section class="intro-screen" id="start" aria-labelledby="title">
+      <div class="scan-grid" aria-hidden="true"></div>
+      <div class="pulse pulse-one" aria-hidden="true"></div>
+      <div class="pulse pulse-two" aria-hidden="true"></div>
 
-  <main class="scene">
-    <section class="card-shell">
-      <div class="birthday-card" id="birthdayCard">
+      <div class="intro-panel">
+        <div class="system-bar">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="system-text">Geburtstagszentrale 2026</span>
+        </div>
 
-        <section class="face face-front">
-          <div class="front-inner">
-            <p class="kicker">Zum 50. Geburtstag</p>
-
-            <h1>
-              Torsten,<br>
-              bitte kurz<br>
-              nicht unauffällig sein.
-            </h1>
-
-            <p class="lead">
-              50 Jahre. Rock im Ohr, Wanderlust im System und
-              mit hoher Wahrscheinlichkeit ein gutes Getränk in Reichweite.
-            </p>
-
-            <div class="front-tags" aria-hidden="true">
-              <span>Rock</span>
-              <span>Wandern</span>
-              <span>Ausflüge</span>
-              <span>solide Trinkkultur</span>
-            </div>
-
-            <button class="button primary" id="openCard">
-              Karte öffnen
-            </button>
-
-            <p class="small-note">
-              Freundlicher Hinweis: Der Inhalt könnte Spuren von Überraschung enthalten.
-            </p>
-          </div>
-        </section>
-
-        <section class="face face-back">
-          <div class="back-top">
-            <div>
-              <p class="file-label">GEHEIMAKTE T-50</p>
-              <h2>Ermittlungsstand zur Geburtstagslage</h2>
-            </div>
-
-            <button class="button secondary" id="closeCard">
-              zurück
-            </button>
-          </div>
-
-          <p class="mystery-intro reveal">
-            Die Lage ist eindeutig: Es wird nicht einfach nur Geburtstag gefeiert.
-            Es verdichten sich Hinweise auf einen Ausflug mit Substanz, Aussicht
-            und kontrolliertem Kontrollverlust.
+        <div class="headline-block">
+          <p class="label">Status: vorbereitet</p>
+          <h1 id="title">Hallo Torsten.</h1>
+          <p class="intro-text">
+            50 Jahre. Viel erlebt. Viel geschafft.
+            Und immer noch bereit für einen guten Ausflug mit Essen, Musik und Getränken.
           </p>
+        </div>
 
-          <div class="clue-grid">
-            <article class="clue reveal">
-              <span class="clue-label">Ausflugsziel</span>
-              <strong>bekannt</strong>
-              <p>Der Zielort ist bereits identifiziert. Die Information wird noch zurückgehalten.</p>
-            </article>
+        <div class="main-counter" aria-label="50. Geburtstag">
+          <span class="counter-number">50</span>
+          <span class="counter-text">Jahre Erfahrung</span>
+        </div>
 
-            <article class="clue reveal">
-              <span class="clue-label">Datum</span>
-              <strong>unbekannt</strong>
-              <p>Die Zeitachse bleibt bewusst vage. Verdächtig, aber stilvoll.</p>
-            </article>
+        <div class="quick-info" aria-label="Themen">
+          <span>🥾 Wandern</span>
+          <span>🍺 Bier</span>
+          <span>🎸 Rock</span>
+          <span>🧭 Ausflug</span>
+        </div>
 
-            <article class="clue reveal">
-              <span class="clue-label">Teilnehmer</span>
-              <strong>zum Teil bekannt</strong>
-              <p>Einige Namen sind im Umlauf. Vollständige Transparenz wäre derzeit unprofessionell.</p>
-            </article>
+        <button class="primary-button" type="button" data-open>
+          Plan öffnen
+        </button>
 
-            <article class="clue reveal">
-              <span class="clue-label">Übernachtung / Hotel</span>
-              <strong>bekannt</strong>
-              <p>Ein Ort zum Landen ist gesichert. Sauberes Bett, gute Basis, keine weitere Aussage.</p>
-            </article>
+        <p class="small-hint">
+          Der Plan ist nicht geheim, weil er gefährlich ist. Er ist geheim, weil es mehr Spaß macht.
+        </p>
+      </div>
+    </section>
 
-            <article class="clue reveal">
-              <span class="clue-label">Abendessen / Restaurant</span>
-              <strong>bekannt</strong>
-              <p>Die Abendverpflegung ist vorgesehen. Hunger ist kein Teil des Konzepts.</p>
-            </article>
+    <section class="dashboard" id="dashboard" hidden>
+      <div class="dashboard-inner">
+        <header class="dashboard-header">
+          <p class="label">Torsten 50</p>
+          <h2>Planübersicht</h2>
+          <p>
+            Die wichtigsten Punkte sind vorbereitet.
+            Einiges ist bekannt. Einiges bleibt noch offen.
+            Alles wirkt verdächtig gut organisiert.
+          </p>
+        </header>
 
-            <article class="clue reveal special">
-              <span class="clue-label">Persönlichkeitsprofil</span>
-              <strong>stabil</strong>
-              <p>
-                Mag Rock. Mag Wandern. Mag Ausflüge. Mag gute Abende.
-                Es besteht also akute Reiseeignung.
-              </p>
-            </article>
+        <section class="status-grid" aria-label="Statusübersicht">
+          <article class="status-card confirmed">
+            <span class="status-kicker">Ausflugsziel</span>
+            <strong>bekannt</strong>
+            <p>Das Ziel steht fest. Es wird nur noch nicht komplett verraten.</p>
+          </article>
+
+          <article class="status-card unknown">
+            <span class="status-kicker">Datum</span>
+            <strong>unbekannt</strong>
+            <p>Der Zeitpunkt bleibt noch offen. Das hält den Kalender wach.</p>
+          </article>
+
+          <article class="status-card partial">
+            <span class="status-kicker">Teilnehmer</span>
+            <strong>zum Teil bekannt</strong>
+            <p>Ein Teil der Runde steht fest. Der Rest erscheint später im Bild.</p>
+          </article>
+
+          <article class="status-card confirmed">
+            <span class="status-kicker">Hotel</span>
+            <strong>bekannt</strong>
+            <p>Die Übernachtung ist geregelt. Improvisieren kann man mit 50 anderen überlassen.</p>
+          </article>
+
+          <article class="status-card confirmed">
+            <span class="status-kicker">Restaurant</span>
+            <strong>bekannt</strong>
+            <p>Das Abendessen ist gesichert. Der Tag endet also nicht mit trockenen Brötchen.</p>
+          </article>
+        </section>
+
+        <section class="timeline" aria-label="Ablauf">
+          <div class="timeline-header">
+            <h2>Ablauf, grob entschlüsselt</h2>
+            <p>Keine Uhrzeiten. Keine Panik. Nur die Richtung.</p>
           </div>
 
-          <div class="stamp-wrap reveal">
-            <div class="stamp">TOP SECRET</div>
-          </div>
+          <div class="timeline-list">
+            <article class="timeline-item">
+              <span class="time-code">01</span>
+              <div>
+                <h3>Start</h3>
+                <p>Wanderschuhe bereithalten. Der Tag beginnt nicht auf dem Sofa.</p>
+              </div>
+            </article>
 
-          <div class="back-footer reveal">
-            <p>
-              Weitere Details werden zu gegebener Zeit offengelegt.
-              Vermutlich nicht nüchtern. Aber seriös genug.
-            </p>
-            <p class="signature">
-              Aktennotiz: Wanderschuhe bereithalten. Kehle ebenfalls.
-            </p>
+            <article class="timeline-item">
+              <span class="time-code">02</span>
+              <div>
+                <h3>Ausflug</h3>
+                <p>Ein Ziel ist geplant. Aussicht und Bewegung sind sehr wahrscheinlich.</p>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <span class="time-code">03</span>
+              <div>
+                <h3>Pause</h3>
+                <p>Durst nicht übertreiben. Aber auch nicht komplett ignorieren.</p>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <span class="time-code">04</span>
+              <div>
+                <h3>Abend</h3>
+                <p>Gutes Essen, gute Runde, kein Pflichtprogramm.</p>
+              </div>
+            </article>
           </div>
         </section>
 
+        <section class="control-panel" aria-label="Checkliste">
+          <div class="control-text">
+            <p class="label">Vorbereitungsstand</p>
+            <h2>Was Torsten wissen muss</h2>
+            <p>
+              Nicht alles. Nur genug, um vorbereitet zu sein.
+              Der Rest wird rechtzeitig enthüllt.
+            </p>
+          </div>
+
+          <div class="checklist">
+            <label>
+              <input type="checkbox" checked>
+              <span>Gute Laune einplanen</span>
+            </label>
+
+            <label>
+              <input type="checkbox" checked>
+              <span>Schuhe nicht im Keller vergessen</span>
+            </label>
+
+            <label>
+              <input type="checkbox" checked>
+              <span>Rock-Modus aktivieren</span>
+            </label>
+
+            <label>
+              <input type="checkbox" checked>
+              <span>Glas sicher bedienen</span>
+            </label>
+
+            <label>
+              <input type="checkbox">
+              <span>Zu viele Fragen stellen</span>
+            </label>
+          </div>
+        </section>
+
+        <section class="birthday-message" aria-label="Geburtstagsbotschaft">
+          <p class="message-big">
+            50 ist kein Neustart. 50 ist die Version mit besseren Einstellungen.
+          </p>
+          <p>
+            Mehr Erfahrung. Weniger Geduld für schlechte Pläne.
+            Genau deshalb wurde dieser Ausflug ordentlich vorbereitet.
+          </p>
+        </section>
+
+        <section class="final-card" aria-label="Abschluss">
+          <h2>Weitere Informationen folgen.</h2>
+          <p>
+            Bis dahin gilt: Haltung bewahren, Schuhe bereithalten,
+            Durst kontrollieren und den Plan nicht zerreden.
+          </p>
+        </section>
+
+        <button class="secondary-button" type="button" data-back>
+          Zurück zur Begrüßung
+        </button>
       </div>
     </section>
   </main>

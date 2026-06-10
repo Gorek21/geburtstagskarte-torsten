@@ -1,0 +1,495 @@
+:root {
+  --bg-1: #120d12;
+  --bg-2: #251722;
+  --bg-3: #3b2232;
+
+  --paper: #f6efdf;
+  --paper-2: #e8d7ba;
+  --ink: #1f1a17;
+  --muted: #66584c;
+
+  --gold: #caa25a;
+  --red: #a6372b;
+  --red-dark: #7f261f;
+  --dark-panel: #191317;
+  --dark-panel-2: #241a20;
+  --line: rgba(255,255,255,0.10);
+  --shadow: rgba(0,0,0,0.42);
+
+  --radius: 30px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  color: var(--ink);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(202, 162, 90, 0.12), transparent 28rem),
+    radial-gradient(circle at 80% 20%, rgba(166, 55, 43, 0.18), transparent 24rem),
+    linear-gradient(135deg, var(--bg-1), var(--bg-2) 50%, var(--bg-3));
+  overflow-x: hidden;
+}
+
+body.card-open {
+  overflow-y: auto;
+}
+
+.page-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.04), transparent 35rem);
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.10;
+  mix-blend-mode: soft-light;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.22) 0.6px, transparent 0.8px);
+  background-size: 8px 8px;
+}
+
+.scene {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+}
+
+.card-shell {
+  width: min(92vw, 900px);
+  perspective: 1800px;
+}
+
+.birthday-card {
+  position: relative;
+  width: 100%;
+  min-height: 620px;
+  transform-style: preserve-3d;
+  transition: transform 1s cubic-bezier(.2,.82,.2,1);
+}
+
+.birthday-card.is-open {
+  transform: rotateY(180deg);
+}
+
+.face {
+  border-radius: var(--radius);
+  backface-visibility: hidden;
+  box-shadow:
+    0 35px 100px var(--shadow),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.face-front {
+  position: absolute;
+  inset: 0;
+  min-height: 620px;
+  overflow: hidden;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.24), transparent 35%),
+    radial-gradient(circle at top left, rgba(202,162,90,0.28), transparent 18rem),
+    linear-gradient(160deg, var(--paper), var(--paper-2));
+}
+
+.face-front::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border: 2px solid rgba(166, 55, 43, 0.28);
+  border-radius: 22px;
+  pointer-events: none;
+}
+
+.face-front::after {
+  content: "";
+  position: absolute;
+  inset: auto -30px -90px auto;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(166,55,43,0.18), transparent 70%);
+  filter: blur(10px);
+}
+
+.front-inner {
+  position: relative;
+  z-index: 1;
+  min-height: 620px;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  padding: clamp(28px, 5vw, 56px);
+}
+
+.kicker,
+.file-label {
+  margin: 0 0 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.kicker {
+  color: var(--red);
+}
+
+.face-front h1 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.8rem, 7vw, 5.8rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 0 rgba(166, 55, 43, 0.18);
+}
+
+.lead {
+  max-width: 40rem;
+  margin: 24px auto 0;
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.front-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 28px 0 0;
+}
+
+.front-tags span {
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(31,26,23,0.10);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #4c3a31;
+}
+
+.button {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  border-radius: 999px;
+  padding: 14px 22px;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button.primary {
+  margin: 28px auto 0;
+  background: linear-gradient(135deg, var(--red-dark), var(--red));
+  color: #fff8f0;
+  box-shadow: 0 18px 36px rgba(127, 38, 31, 0.28);
+}
+
+.button.secondary {
+  background: rgba(255,255,255,0.08);
+  color: #f6eee3;
+  border: 1px solid rgba(255,255,255,0.16);
+}
+
+.small-note {
+  margin: 18px auto 0;
+  max-width: 34rem;
+  color: #6d5d52;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.face-back {
+  position: relative;
+  min-height: 620px;
+  transform: rotateY(180deg);
+  color: #f6eee3;
+  background:
+    radial-gradient(circle at top right, rgba(202,162,90,0.10), transparent 18rem),
+    linear-gradient(160deg, var(--dark-panel), var(--dark-panel-2));
+  padding: clamp(24px, 4vw, 38px);
+  overflow: visible;
+}
+
+.face-back::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 22px;
+  pointer-events: none;
+}
+
+.back-top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.file-label {
+  color: var(--gold);
+}
+
+.face-back h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1;
+}
+
+.mystery-intro {
+  position: relative;
+  z-index: 1;
+  margin: 14px 0 0;
+  max-width: 48rem;
+  color: rgba(246,238,227,0.88);
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+.clue-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.clue {
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.09);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.clue.special {
+  grid-column: 1 / -1;
+}
+
+.clue-label {
+  display: block;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.75rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.clue strong {
+  display: block;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.clue p {
+  margin: 0;
+  color: rgba(246,238,227,0.82);
+  line-height: 1.6;
+}
+
+.stamp-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+.stamp {
+  padding: 10px 16px;
+  border: 2px solid rgba(166, 55, 43, 0.85);
+  color: rgba(166, 55, 43, 0.92);
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transform: rotate(-11deg);
+  border-radius: 8px;
+  opacity: 0.9;
+}
+
+.back-footer {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.back-footer p {
+  margin: 0;
+  color: rgba(246,238,227,0.88);
+  line-height: 1.65;
+}
+
+.signature {
+  margin-top: 10px !important;
+  color: var(--gold) !important;
+  font-weight: 700;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+.birthday-card.is-open .reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 820px) {
+  .scene {
+    display: block;
+    min-height: 100svh;
+    padding: 14px;
+  }
+
+  .card-shell {
+    width: 100%;
+    perspective: none;
+  }
+
+  .birthday-card {
+    min-height: auto;
+    transform: none;
+    transition: none;
+  }
+
+  .birthday-card.is-open {
+    transform: none;
+  }
+
+  .face {
+    box-shadow:
+      0 22px 60px rgba(0,0,0,0.34),
+      inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+
+  .face-front {
+    position: relative;
+    min-height: calc(100svh - 28px);
+    display: block;
+  }
+
+  .front-inner {
+    min-height: calc(100svh - 28px);
+  }
+
+  .face-back {
+    display: none;
+    transform: none;
+    min-height: auto;
+    padding: 26px 18px 34px;
+    overflow: visible;
+  }
+
+  .birthday-card.is-open .face-front {
+    display: none;
+  }
+
+  .birthday-card.is-open .face-back {
+    display: block;
+  }
+
+  .clue-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .clue.special {
+    grid-column: auto;
+  }
+
+  .back-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .button.secondary {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .scene {
+    padding: 10px;
+  }
+
+  .face-front,
+  .front-inner {
+    min-height: calc(100svh - 20px);
+  }
+
+  .front-inner {
+    padding: 28px 20px;
+  }
+
+  .face-front h1 {
+    font-size: clamp(2.3rem, 12vw, 4.2rem);
+  }
+
+  .lead {
+    font-size: 1rem;
+  }
+
+  .front-tags {
+    gap: 8px;
+  }
+
+  .front-tags span {
+    font-size: 0.86rem;
+    padding: 8px 10px;
+  }
+
+  .face-back {
+    padding: 24px 16px 34px;
+  }
+
+  .face-back h2 {
+    font-size: clamp(2rem, 11vw, 3rem);
+  }
+
+  .mystery-intro {
+    font-size: 1rem;
+  }
+
+  .clue {
+    padding: 16px;
+  }
+
+  .clue strong {
+    font-size: 1.22rem;
+  }
+
+  .clue p {
+    font-size: 0.98rem;
+  }
+}
