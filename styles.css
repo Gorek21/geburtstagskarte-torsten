@@ -126,17 +126,17 @@ button {
 
 /* Foto-Intro */
 
-.intro-photo {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform-origin: center center;
-  will-change: transform;
-  transition: transform 80ms linear;
-  -webkit-user-drag: none;
-  user-select: none;
-  touch-action: none;
+.photo-intro {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px 14px;
+  isolation: isolate;
+  transition:
+    opacity 520ms ease,
+    transform 520ms ease,
+    filter 520ms ease;
 }
 
 .photo-intro.is-leaving {
@@ -235,6 +235,9 @@ button {
 }
 
 .photo-stage-wrap {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
   padding: 10px;
   border-radius: 24px;
   background:
@@ -245,9 +248,10 @@ button {
 }
 
 .photo-stage {
-  position: relative;
-  height: min(54svh, 470px);
-  min-height: 300px;
+  width: fit-content;
+  max-width: 100%;
+  height: auto;
+  min-height: 0;
   overflow: hidden;
   border-radius: 18px;
   background:
@@ -255,53 +259,27 @@ button {
     linear-gradient(180deg, rgba(36, 26, 19, 0.06), rgba(36, 26, 19, 0.18)),
     #ead9b7;
   border: 1px solid rgba(36, 26, 19, 0.12);
-  display: grid;
-  place-items: center;
-  user-select: none;
-}
-
-.photo-stage.is-zoomed {
-  box-shadow: inset 0 0 0 2px rgba(212, 154, 51, 0.28);
+  display: block;
 }
 
 .intro-photo {
   display: block;
-  max-width: 100%;
-  max-height: 100%;
   width: auto;
   height: auto;
+  max-width: 100%;
+  max-height: min(58svh, 560px);
   object-fit: contain;
-  transform-origin: center center;
-  will-change: transform;
-  transition: transform 80ms linear;
+  border-radius: 16px;
   -webkit-user-drag: none;
   user-select: none;
-  touch-action: none;
-}
-
-.photo-hint-row {
-  display: grid;
-  gap: 8px;
-  margin-top: 14px;
 }
 
 .photo-hint {
-  margin: 0;
+  margin: 14px 0 0;
   color: rgba(36, 26, 19, 0.72);
   font-size: 0.92rem;
   line-height: 1.45;
-}
-
-.reset-zoom-button {
-  justify-self: start;
-  min-height: 38px;
-  padding: 0 14px;
-  border: 1px solid rgba(36, 26, 19, 0.18);
-  border-radius: 999px;
-  background: rgba(255,255,255,0.26);
-  color: var(--ink);
-  font-weight: 800;
-  cursor: pointer;
+  text-align: center;
 }
 
 .photo-action-row {
@@ -327,14 +305,12 @@ button {
   transition: transform 180ms ease, filter 180ms ease;
 }
 
-.photo-next-button:hover,
-.reset-zoom-button:hover {
+.photo-next-button:hover {
   transform: translateY(-2px);
   filter: brightness(1.04);
 }
 
-.photo-next-button:active,
-.reset-zoom-button:active {
+.photo-next-button:active {
   transform: translateY(1px);
 }
 
@@ -727,6 +703,162 @@ p {
   line-height: 1.1;
 }
 
+/* Sponsored by */
+
+.sponsor-section {
+  perspective: 1000px;
+}
+
+.sponsor-card {
+  width: 100%;
+  position: relative;
+  display: grid;
+  border: 0;
+  padding: 0;
+  border-radius: var(--radius-xl);
+  background: transparent;
+  color: var(--cream);
+  cursor: pointer;
+  transform-style: preserve-3d;
+}
+
+.sponsor-face {
+  grid-area: 1 / 1;
+  width: 100%;
+  min-height: 210px;
+  display: grid;
+  place-items: center;
+  gap: 10px;
+  padding: 22px 18px;
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 191, 82, 0.24);
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 191, 82, 0.18), transparent 34%),
+    radial-gradient(circle at 86% 12%, rgba(157, 79, 47, 0.22), transparent 30%),
+    linear-gradient(135deg, rgba(255, 244, 220, 0.09), rgba(255, 244, 220, 0.03)),
+    rgba(13, 14, 16, 0.76);
+  box-shadow:
+    0 22px 70px rgba(0, 0, 0, 0.24),
+    inset 0 0 0 1px rgba(255,255,255,0.05);
+  backface-visibility: hidden;
+  transition: transform 520ms ease, filter 220ms ease;
+  text-align: center;
+  overflow: hidden;
+}
+
+.sponsor-face::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px dashed rgba(255, 191, 82, 0.22);
+  border-radius: calc(var(--radius-xl) - 8px);
+  pointer-events: none;
+}
+
+.sponsor-front {
+  position: relative;
+}
+
+.sponsor-back {
+  position: relative;
+  transform: rotateY(180deg);
+}
+
+.sponsor-card.is-flipped .sponsor-front {
+  transform: rotateY(-180deg);
+}
+
+.sponsor-card.is-flipped .sponsor-back {
+  transform: rotateY(0);
+}
+
+.sponsor-card:hover .sponsor-face {
+  filter: brightness(1.06);
+}
+
+.sponsor-card:focus-visible {
+  outline: 3px solid rgba(255, 191, 82, 0.72);
+  outline-offset: 4px;
+}
+
+.sponsor-kicker {
+  color: var(--amber);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.sponsor-face strong {
+  color: var(--paper);
+  font-size: clamp(1.35rem, 5.5vw, 1.9rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.sponsor-hint {
+  color: rgba(255, 244, 220, 0.62);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.sponsor-list {
+  width: 100%;
+  display: grid;
+  gap: 8px;
+  margin: 2px 0;
+}
+
+.sponsor-name {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  color: rgba(255, 244, 220, 0.9);
+  background:
+    linear-gradient(135deg, rgba(255, 191, 82, 0.16), rgba(255, 244, 220, 0.055)),
+    rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 191, 82, 0.18);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.035),
+    0 8px 18px rgba(0,0,0,0.16);
+  font-size: 0.93rem;
+  line-height: 1.28;
+  font-weight: 800;
+  overflow: hidden;
+}
+
+.sponsor-name::before {
+  content: "★";
+  display: inline-block;
+  margin-right: 7px;
+  color: var(--amber);
+  font-size: 0.74rem;
+  transform: translateY(-1px);
+}
+
+.sponsor-name::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -45%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.16),
+    transparent
+  );
+  transform: skewX(-18deg);
+  transition: left 650ms ease;
+}
+
+.sponsor-card.is-flipped .sponsor-name::after {
+  left: 120%;
+}
+
 .back-button {
   margin-top: 4px;
   background: rgba(255, 244, 220, 0.08);
@@ -783,62 +915,6 @@ p {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-
-
-/* Siegel: vollständige Bildansicht */
-
-.seal-area {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  padding-bottom: 2px;
-}
-
-.reveal-seal {
-  width: 138px;
-  height: 138px;
-  border-radius: 999px;
-  border: 2px dashed rgba(36, 26, 19, 0.58);
-  background:
-    radial-gradient(circle at 50% 34%, rgba(255,255,255,0.34), transparent 42%),
-    linear-gradient(145deg, #fff0c9, #d6a352 52%, #b87432);
-  color: var(--ink);
-  box-shadow:
-    0 16px 34px rgba(36, 26, 19, 0.24),
-    inset 0 0 0 8px rgba(255,255,255,0.16),
-    inset 0 0 0 1px rgba(255,255,255,0.46);
-  font-weight: 950;
-  font-size: 0.82rem;
-  line-height: 1.18;
-  text-align: center;
-  cursor: pointer;
-  transform: rotate(-5deg);
-  transition: transform 180ms ease, filter 180ms ease;
-}
-
-.reveal-seal:hover {
-  transform: rotate(-2deg) scale(1.04);
-  filter: brightness(1.05);
-}
-
-.reveal-seal:active {
-  transform: rotate(-2deg) scale(0.98);
-}
-
-.photo-stage.show-full {
-  box-shadow:
-    inset 0 0 0 2px rgba(212, 154, 51, 0.36),
-    0 0 0 1px rgba(36, 26, 19, 0.08);
-}
-
-.photo-stage.show-full .intro-photo {
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  max-height: none;
-  object-fit: contain;
 }
 
 @media (min-width: 520px) {
